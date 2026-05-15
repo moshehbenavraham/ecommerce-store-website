@@ -3,30 +3,101 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Linea - Minimalist jewelry crafted for the modern individual</title>
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#171717" />
+    <title>Linea — Minimalist jewelry crafted for the modern individual</title>
     <meta
       name="description"
-      content="Minimalist jewelry e-commerce storefront for Linea's architectural collections."
+      content="Linea is a minimalist jewelry e-commerce storefront featuring curated rings, earrings, bracelets, and necklaces from architectural collections."
     />
-    <meta name="author" content="Linea" />
+    <meta name="author" content="Linea Jewelry Inc." />
 
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Linea - Minimalist jewelry crafted for the modern individual" />
+    <meta property="og:site_name" content="Linea" />
+    <meta property="og:title" content="Linea — Minimalist jewelry crafted for the modern individual" />
     <meta
       property="og:description"
-      content="Minimalist jewelry e-commerce storefront for Linea's architectural collections."
+      content="Linea is a minimalist jewelry e-commerce storefront featuring curated rings, earrings, bracelets, and necklaces from architectural collections."
     />
     <meta property="og:image" content="/social-card.svg" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@linea" />
-    <meta name="twitter:title" content="Linea - Minimalist jewelry crafted for the modern individual" />
+    <meta name="twitter:title" content="Linea — Minimalist jewelry crafted for the modern individual" />
     <meta
       name="twitter:description"
-      content="Minimalist jewelry e-commerce storefront for Linea's architectural collections."
+      content="Linea is a minimalist jewelry e-commerce storefront featuring curated rings, earrings, bracelets, and necklaces from architectural collections."
     />
     <meta name="twitter:image" content="/social-card.svg" />
+
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Anti-FOUC: apply dark class before paint so first render matches user preference. -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var theme = stored === "dark" || stored === "light" ? stored : stored === "system" || !stored ? (prefersDark ? "dark" : "light") : "light";
+          if (theme === "dark") document.documentElement.classList.add("dark");
+        } catch (e) {
+          /* localStorage unavailable; default to light */
+        }
+      })();
+    </script>
+
+    <!-- Site-level Organization + WebSite JSON-LD for richer search results. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://linea-jewelry.app/#organization",
+            "name": "Linea",
+            "legalName": "Linea Jewelry Inc.",
+            "url": "https://linea-jewelry.app",
+            "logo": "https://linea-jewelry.app/LINEA.svg",
+            "description": "Minimalist jewelry e-commerce storefront featuring curated rings, earrings, bracelets, and necklaces from architectural collections.",
+            "sameAs": [
+              "https://www.instagram.com/linea",
+              "https://www.pinterest.com/linea"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://linea-jewelry.app/#website",
+            "url": "https://linea-jewelry.app",
+            "name": "Linea",
+            "publisher": { "@id": "https://linea-jewelry.app/#organization" },
+            "inLanguage": "en"
+          },
+          {
+            "@type": "Store",
+            "@id": "https://linea-jewelry.app/#store",
+            "name": "Linea",
+            "url": "https://linea-jewelry.app",
+            "image": "https://linea-jewelry.app/social-card.svg",
+            "priceRange": "€€€",
+            "currenciesAccepted": "EUR",
+            "paymentAccepted": "Credit Card",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "123 Madison Avenue",
+              "addressLocality": "New York",
+              "addressRegion": "NY",
+              "postalCode": "10016",
+              "addressCountry": "US"
+            },
+            "telephone": "+1-212-555-0123",
+            "email": "hello@lineajewelry.com"
+          }
+        ]
+      }
+    </script>
   </head>
 
   <body>

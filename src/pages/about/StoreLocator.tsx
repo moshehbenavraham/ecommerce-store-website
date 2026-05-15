@@ -5,6 +5,7 @@ import ContentSection from "../../components/about/ContentSection";
 import StoreMap from "../../components/about/StoreMap";
 import { Button } from "../../components/ui/button";
 import AboutSidebar from "../../components/about/AboutSidebar";
+import SEO from "../../components/SEO";
 
 const StoreLocator = () => {
   const stores = [
@@ -33,14 +34,19 @@ const StoreLocator = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Store Locator"
+        description="Visit Linea in person — flagship boutiques on Madison Avenue, Rodeo Drive, and SoHo offering personal shopping, custom design, and repairs."
+        path="/about/store-locator"
+      />
       <Header />
-      
+
       <div className="flex">
         <div className="hidden lg:block">
           <AboutSidebar />
         </div>
         
-        <main className="w-full lg:w-[70vw] lg:ml-auto px-6">
+        <main id="main-content" className="w-full lg:w-[70vw] lg:ml-auto px-6">
         <PageHeader 
           title="Store Locator" 
           subtitle="Visit us in person for a personalized jewelry experience"

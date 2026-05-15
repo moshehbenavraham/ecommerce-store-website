@@ -4,18 +4,24 @@ import PageHeader from "../../components/about/PageHeader";
 import ContentSection from "../../components/about/ContentSection";
 import ImageTextBlock from "../../components/about/ImageTextBlock";
 import AboutSidebar from "../../components/about/AboutSidebar";
+import SEO from "../../components/SEO";
 
 const OurStory = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Our Story"
+        description="The story behind Linea — a journey of passion, craftsmanship, and timeless elegance in minimalist jewelry design."
+        path="/about/our-story"
+      />
       <Header />
-      
+
       <div className="flex">
         <div className="hidden lg:block">
           <AboutSidebar />
         </div>
-        
-        <main className="w-full lg:w-[70vw] lg:ml-auto px-6">
+
+        <main id="main-content" className="w-full lg:w-[70vw] lg:ml-auto px-6">
           <PageHeader 
             title="Our Story" 
             subtitle="A journey of passion, craftsmanship, and timeless elegance"

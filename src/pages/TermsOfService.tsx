@@ -1,17 +1,18 @@
-import { useEffect } from "react";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
+import SEO from "../components/SEO";
 
 const TermsOfService = () => {
-  useEffect(() => {
-    document.title = "Terms of Service - Linea Jewelry";
-  }, []);
-
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Terms of Service"
+        description="Read the terms that govern your use of Linea's website, products, and services."
+        path="/terms-of-service"
+      />
       <Header />
-      
-      <main className="pt-6">
+
+      <main id="main-content" className="pt-6">
         <div className="max-w-4xl mx-auto px-6 py-12">
           <header className="mb-12 text-center">
             <h1 className="text-4xl font-light text-foreground mb-4">Terms of Service</h1>

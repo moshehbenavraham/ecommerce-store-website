@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Minus, Plus, CreditCard, Check } from "lucide-react";
 import CheckoutHeader from "../components/header/CheckoutHeader";
 import Footer from "../components/footer/Footer";
+import SEO from "../components/SEO";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -130,9 +131,14 @@ const Checkout = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Checkout"
+        description="Complete your Linea jewelry order — secure checkout with multiple shipping options."
+        noindex
+      />
       <CheckoutHeader />
-      
-      <main className="pt-6 pb-12">
+
+      <main id="main-content" className="pt-6 pb-12">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             

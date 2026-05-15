@@ -4,18 +4,24 @@ import PageHeader from "../../components/about/PageHeader";
 import ContentSection from "../../components/about/ContentSection";
 import { Button } from "../../components/ui/button";
 import AboutSidebar from "../../components/about/AboutSidebar";
+import SEO from "../../components/SEO";
 
 const SizeGuide = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Size Guide"
+        description="Find your perfect fit — Linea's comprehensive guide to ring, bracelet, and necklace sizing."
+        path="/about/size-guide"
+      />
       <Header />
-      
+
       <div className="flex">
         <div className="hidden lg:block">
           <AboutSidebar />
         </div>
-        
-        <main className="w-full lg:w-[70vw] lg:ml-auto px-6">
+
+        <main id="main-content" className="w-full lg:w-[70vw] lg:ml-auto px-6">
         <PageHeader 
           title="Size Guide" 
           subtitle="Find your perfect fit with our comprehensive sizing guide"

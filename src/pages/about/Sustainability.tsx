@@ -3,18 +3,24 @@ import Footer from "../../components/footer/Footer";
 import PageHeader from "../../components/about/PageHeader";
 import ContentSection from "../../components/about/ContentSection";
 import AboutSidebar from "../../components/about/AboutSidebar";
+import SEO from "../../components/SEO";
 
 const Sustainability = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Sustainability"
+        description="Linea's commitment to ethical sourcing, recycled metals, lifetime repair, and a circular jewelry economy."
+        path="/about/sustainability"
+      />
       <Header />
-      
+
       <div className="flex">
         <div className="hidden lg:block">
           <AboutSidebar />
         </div>
-        
-        <main className="w-full lg:w-[70vw] lg:ml-auto px-6">
+
+        <main id="main-content" className="w-full lg:w-[70vw] lg:ml-auto px-6">
         <PageHeader 
           title="Sustainability" 
           subtitle="Creating beautiful jewelry while protecting our planet for future generations"

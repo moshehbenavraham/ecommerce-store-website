@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Header from "../components/header/Header";
@@ -6,23 +7,60 @@ import ProductImageGallery from "../components/product/ProductImageGallery";
 import ProductInfo from "../components/product/ProductInfo";
 import ProductDescription from "../components/product/ProductDescription";
 import ProductCarousel from "../components/content/ProductCarousel";
-import { 
-  Breadcrumb, 
-  BreadcrumbItem, 
-  BreadcrumbLink, 
-  BreadcrumbList, 
-  BreadcrumbPage, 
-  BreadcrumbSeparator 
+import SEO, { SITE_URL } from "../components/SEO";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator
 } from "@/components/ui/breadcrumb";
+
+const titleCase = (slug: string) =>
+  slug
+    .split("-")
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
 
 const ProductDetail = () => {
   const { productId } = useParams();
+  const productLabel = productId ? titleCase(productId) : "Pantheon";
+  const path = `/product/${productId ?? "pantheon"}`;
+
+  // Memoize so SEO's useEffect doesn't fire on every parent re-render with a fresh reference.
+  const productJsonLd = useMemo(
+    () => ({
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: productLabel,
+      description: `${productLabel} — handcrafted minimalist jewelry from Linea's architectural collections.`,
+      image: `${SITE_URL}/social-card.svg`,
+      brand: { "@type": "Brand", name: "Linea" },
+      offers: {
+        "@type": "Offer",
+        url: `${SITE_URL}${path}`,
+        priceCurrency: "EUR",
+        availability: "https://schema.org/InStock",
+        itemCondition: "https://schema.org/NewCondition",
+      },
+    }),
+    [productLabel, path],
+  );
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title={productLabel}
+        description={`${productLabel} from Linea — minimalist, architecturally inspired jewelry crafted for the modern individual.`}
+        path={path}
+        type="product"
+        jsonLd={productJsonLd}
+      />
       <Header />
-      
-      <main className="pt-6">
+
+      <main id="main-content" className="pt-6">
         <section className="w-full px-6">
           {/* Breadcrumb - Show above image on smaller screens */}
           <div className="lg:hidden mb-6">
