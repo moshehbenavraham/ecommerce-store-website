@@ -1,20 +1,23 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import {
+  SITE_URL as SITE_URL_FROM_LIB,
+  SITE_NAME as SITE_NAME_FROM_LIB,
+  SITE_TAGLINE as SITE_TAGLINE_FROM_LIB,
+  SITE_DESCRIPTION as SITE_DESCRIPTION_FROM_LIB,
+  SITE_TWITTER,
+} from "@/lib/site";
 
 /**
- * Centralized site constants used by SEO tags, JSON-LD, and sitemap entries.
- *
- * NOTE: SITE_URL is an assumed production hostname. If a real domain is
- * provisioned, update this single constant (and public/sitemap.xml) so all
- * canonical / OG / Twitter / JSON-LD URLs follow.
+ * Re-export the central site constants so existing imports
+ * (e.g. ProductDetail.tsx pulling SITE_URL from this file) keep working.
+ * New code should import directly from "@/lib/site".
  */
-export const SITE_URL = "https://linea-jewelry.app";
-export const SITE_NAME = "Linea";
-export const SITE_TAGLINE = "Minimalist jewelry crafted for the modern individual";
-export const DEFAULT_DESCRIPTION =
-  "Linea is a minimalist jewelry e-commerce storefront featuring curated rings, earrings, bracelets, and necklaces from architectural collections.";
+export const SITE_URL = SITE_URL_FROM_LIB;
+export const SITE_NAME = SITE_NAME_FROM_LIB;
+export const SITE_TAGLINE = SITE_TAGLINE_FROM_LIB;
+export const DEFAULT_DESCRIPTION = SITE_DESCRIPTION_FROM_LIB;
 export const DEFAULT_IMAGE = "/social-card.svg";
-export const TWITTER_HANDLE = "@linea";
 
 export type JsonLdObject = Record<string, unknown>;
 
@@ -43,6 +46,11 @@ function upsertMeta(attr: "name" | "property", key: string, value: string) {
     document.head.appendChild(el);
   }
   el.setAttribute("content", value);
+}
+
+function removeMeta(attr: "name" | "property", key: string) {
+  const el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
+  if (el) el.remove();
 }
 
 function upsertLink(rel: string, href: string) {
@@ -106,7 +114,14 @@ const SEO = ({
     upsertMeta("property", "og:site_name", SITE_NAME);
 
     upsertMeta("name", "twitter:card", "summary_large_image");
-    upsertMeta("name", "twitter:site", TWITTER_HANDLE);
+    // Only emit twitter:site when a real handle is configured — pointing at
+    // a fictional @linea handle (the old default) misled crawlers and the
+    // Twitter Cards validator.
+    if (SITE_TWITTER) {
+      upsertMeta("name", "twitter:site", SITE_TWITTER);
+    } else {
+      removeMeta("name", "twitter:site");
+    }
     upsertMeta("name", "twitter:title", fullTitle);
     upsertMeta("name", "twitter:description", description);
     upsertMeta("name", "twitter:image", absImage);
